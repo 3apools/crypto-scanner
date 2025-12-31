@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+      build: .
+          ports:
+                - "8000:8000"
+                    environment:
+                          - DEBUG=False
+                                - API_HOST=0.0.0.0
+                                      - API_PORT=8000
+                                          volumes:
+                                                - .:/app
+                                                    depends_on:
+                                                          - redis
+                                                              networks:
+                                                                    - crypto-network
+
+                                                                      redis:
+                                                                          image: redis:7-alpine
+                                                                              ports:
+                                                                                    - "6379:6379"
+                                                                                        networks:
+                                                                                              - crypto-network
+                                                                                                  healthcheck:
+                                                                                                        test: ["CMD", "redis-cli", "ping"]
+                                                                                                              interval: 10s
+                                                                                                                    timeout: 5s
+                                                                                                                          retries: 5
+                                                                                                                          
+                                                                                                                          networks:
+                                                                                                                            crypto-network:
+                                                                                                                                driver: bridge
+                                                                                                                                
