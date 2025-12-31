@@ -1,0 +1,82 @@
+{
+    "version": "1.0.0",
+    "scoring_dimensions": {
+          "fundamentals": {
+                  "weight": 0.25,
+                  "min_score": 0,
+                  "max_score": 100,
+                  "metrics": {
+                            "token_economics": 0.4,
+                            "development_activity": 0.35,
+                            "onchain_metrics": 0.25
+                  }
+          },
+          "technicals": {
+                  "weight": 0.25,
+                  "min_score": 0,
+                  "max_score": 100,
+                  "metrics": {
+                            "price_action": 0.4,
+                            "volume_patterns": 0.35,
+                            "momentum_indicators": 0.25
+                  }
+          },
+          "sentiment": {
+                  "weight": 0.25,
+                  "min_score": 0,
+                  "max_score": 100,
+                  "metrics": {
+                            "social_media": 0.4,
+                            "news_sentiment": 0.35,
+                            "community_engagement": 0.25
+                  }
+          },
+          "smart_money": {
+                  "weight": 0.25,
+                  "min_score": 0,
+                  "max_score": 100,
+                  "metrics": {
+                            "whale_accumulation": 0.4,
+                            "exchange_flows": 0.35,
+                            "pro_positioning": 0.25
+                  }
+          }
+    },
+    "signal_thresholds": {
+          "strong_buy": 80,
+          "buy": 65,
+          "hold": 50,
+          "sell": 35,
+          "strong_sell": 20
+    },
+    "edge_case_handling": {
+          "stablecoins": {
+                  "enabled": true,
+                  "skip_technicals": true,
+                  "focus_metrics": ["reserves", "flows"],
+                  "max_score": 60
+          },
+          "new_tokens": {
+                  "min_days": 30,
+                  "enabled": true,
+                  "reduced_confidence": true,
+                  "confidence_threshold": 0.4
+          },
+          "flash_crash": {
+                  "enabled": true,
+                  "ignore_threshold_percent": 15,
+                  "use_vwap": true
+          },
+          "low_liquidity": {
+                  "enabled": true,
+                  "min_volume_usd": 100000,
+                  "penalty_percent": 20
+          }
+    },
+    "dynamic_rebalancing": {
+          "enabled": true,
+          "btc_dominance_threshold": 40,
+          "bull_weights": {"fundamentals": 0.2, "technicals": 0.3, "sentiment": 0.2, "smart_money": 0.3},
+          "bear_weights": {"fundamentals": 0.35, "technicals": 0.2, "sentiment": 0.15, "smart_money": 0.3}
+    }
+}
